@@ -1,0 +1,31 @@
+{
+  "name": "tictactoejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "browserify-shim": "^3.8.14",
+    "chai": "^4.1.2",
+    "exposify": "^0.5.0",
+    "gulp-append-prepend": "^1.0.4",
+    "gulp-gzip": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "mocha": "^3.5.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "yargs": "^8.0.2"
+  },
+  "dependencies": {
+    "phaser": "^2.6.2"
+  }
+}
