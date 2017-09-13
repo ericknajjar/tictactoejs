@@ -45,16 +45,16 @@ gulp.task('bundleTests', function() {
             debug : true
           }).transform(babelify,{presets: ["env"]})
     
-          b.bundle()
+         return b.bundle()
           .pipe(source('bundle.js'))
           .pipe(buffer())
-          .pipe(gap.prependFile('./node_modules/phaser/build/custom/pixi.min.js'))
-          .pipe(gap.prependFile('./node_modules/phaser/build/custom/p2.min.js'))
+          //.pipe(gap.prependFile('./node_modules/phaser/build/custom/pixi.min.js'))
+          //.pipe(gap.prependFile('./node_modules/phaser/build/custom/p2.min.js'))
           .pipe(gulp.dest("src/tests"))
 });
 
 gulp.task('test',['bundleTests'], function (done) {
-    new Server({
+    return new Server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
     }, done).start();

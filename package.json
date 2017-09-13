@@ -23,14 +23,18 @@
     "jasmine-core": "^2.8.0",
     "karma": "^1.7.1",
     "karma-browserify": "^5.1.1",
+    "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.4",
+    "karma-source-map-support": "^1.2.0",
     "mocha": "^3.5.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "yargs": "^8.0.2"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "lodash": "^4.17.4",
     "phaser": "^2.6.2"
   }
 }
