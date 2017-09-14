@@ -56,6 +56,7 @@ describe("A GameState", function() {
         let notContains = gameState.PossibleMoves.find( (m) => {
             
             return m.equals(move);
+            
         }) == undefined;
                 
         expect(notContains).toEqual(true);

@@ -1,8 +1,6 @@
-
-
 class MoveScore
 {
-    MoveScore(move,score)
+    constructor(move,score)
     {
         this._move = move;
         this._score = score;
@@ -30,7 +28,7 @@ export class MiniMaxAi
 
     NextMove(beginingState){
         if(!beginingState.IsEndState)
-            return MiniMax (beginingState, -1000,1000).Move;
+            return this._MiniMax (beginingState, -1000,1000).Move;
 
         throw "Can't determine next move from an end state";
     }
@@ -40,12 +38,12 @@ export class MiniMaxAi
     {
         let best = new MoveScore (null,0);
 
-        for(let i=0;i<s.AllMoves.lenght;++i)
+        for(let i=0;i<s.AllMoves.length;++i)
         {
             let move = s.AllMoves[i];
 
             let newState = s.Pick(move);
-            let score = _MiniMaxInner(newState,move,alpha,beta);
+            let score = this._MiniMaxInner(newState,move,alpha,beta);
             let moveScore = new MoveScore(move,score.Score);
 
             if(best.Move == null)
@@ -88,7 +86,7 @@ export class MiniMaxAi
         if (s.IsEndState)
             return new MoveScore(move,s.Score);
         
-        return MiniMax (s,alpha,beta);
+        return this._MiniMax (s,alpha,beta);
     }
 
 }

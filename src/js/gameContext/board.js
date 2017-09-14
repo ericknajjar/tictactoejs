@@ -34,7 +34,7 @@ export class Board{
         {
             for (let j = 0; j < 3; ++j) 
             {
-                var target = new Point(i,j);
+                let target = new Point(i,j);
                 callback(this._boardData[i][j],target);
             }
         }

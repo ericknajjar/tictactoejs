@@ -48,14 +48,9 @@ export class GameState
         return new GameState (this._currentPlayer.Other, newBoard);
     }
 
-    forEachCell(visitor)
-    {
-        this._board.ForeachCell (visitor);
-    }
-
     get IsEndState(){
     
-            return !this.VictoryState.Winner.equals (Player.None) || this._possibleMoves.length == 0;
+            return (!this.VictoryState.Winner.equals (Player.None)) || this._possibleMoves.length == 0;
     } 
 
     getPlayer(point){
