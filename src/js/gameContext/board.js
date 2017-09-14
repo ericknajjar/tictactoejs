@@ -2,12 +2,12 @@ import {VictoryState} from "./victoryState.js"
 import {Player} from "./player.js"
 import {BoardVictoryAnalyser} from "./boardVictoryAnalyser.js"
 
-function _fromPlay(newData,victoryState)
+function _fromPlay(newData,victoryState,numberOfPlays)
 {
     let newBoard = new Board(false);
     newBoard._boardData = newData;
     newBoard.VictoryState = victoryState;
-
+    newBoard._numberOfPlays = numberOfPlays;
     return newBoard;
 }
 
@@ -20,6 +20,7 @@ export class Board{
             this._boardData = [[Player.None,Player.None,Player.None],
             [Player.None,Player.None,Player.None],
             [Player.None,Player.None,Player.None]];
+            this._numberOfPlays = 0;
         }
     }
 
@@ -32,17 +33,17 @@ export class Board{
         let newData = this._boardData.slice();
         newData[position.X][position.Y] = player;
 
-        if(this.VictoryState.Winner.equals(Player.None))
+        if(this._numberOfPlays>=2 && this.VictoryState.Winner.equals(Player.None))
         {
             let victoryAnalyser = new BoardVictoryAnalyser(position);
             let vicoryState = victoryAnalyser.Check(newData);
 
-            return _fromPlay(newData,vicoryState);
+            return _fromPlay(newData,vicoryState,this._numberOfPlays+1);
 
         }
         else
         {
-            return _fromPlay(newData,this.VictoryState);
+            return _fromPlay(newData,this.VictoryState,this._numberOfPlays+1);
         }
 
     }
