@@ -2,7 +2,6 @@ import * as Phaser from 'phaser/build/custom/phaser-split';
 window.Phaser = Phaser
 
 
-import * as test from "./test.js";
 class State{
     constructor() {
     }

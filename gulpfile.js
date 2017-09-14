@@ -36,9 +36,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('bundleTests', function() {
-    
-        var dest = isProduction? "release/js":"dev/js"
-    
+        
         var b = browserify({
             entries: 'src/tests/tests.js',
             insertGlobals : true,

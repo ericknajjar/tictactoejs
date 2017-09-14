@@ -18,6 +18,11 @@ export class Point{
 
     equals(other)
     {
+        if(typeof other != typeof this)
+        {
+            return false;
+        }
+
         return other.Y == this.Y && other.X == this.X;
     }
 
