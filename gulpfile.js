@@ -8,8 +8,15 @@ var gap = require('gulp-append-prepend');
 var argv = require('yargs').argv;
 var gzip = require('gulp-gzip');
 var Server = require('karma').Server;
-var isProduction = (argv.prod === undefined) ? false : true;
+var serve = require('gulp-serve');
+var concat = require('gulp-concat');
+var gulpif = require('gulp-if');
+var gulpsync = require('gulp-sync')(gulp);
 
+var isProduction = (argv.prod === undefined) ? false : true;
+var withLibs = (argv.withlibs === undefined) ? false : true;
+
+var phaserLibsPath = './node_modules/phaser/build/custom/';
 
 gulp.task('scripts', function() {
 
@@ -21,18 +28,31 @@ gulp.task('scripts', function() {
         debug : true
       }).transform(babelify,{presets: ["env"]})
 
-      var basic = b.bundle()
+     return producer = b.bundle()
       .pipe(source('app.js'))
       .pipe(buffer())
-      .pipe(gap.prependFile('./node_modules/phaser/build/custom/pixi.min.js'))
-      .pipe(gap.prependFile('./node_modules/phaser/build/custom/p2.min.js'))
+      .pipe(gulpif(isProduction,uglify()))
+      .pipe(gulp.dest(dest))
+});
 
-      var complete = isProduction?basic.pipe(uglify()):basic
-      
-      complete.pipe(gulp.dest(dest))
 
-      if(isProduction)
-        gulp.src(dest+"/app.js").pipe(gzip()).pipe(gulp.dest(dest))
+gulp.task('libs',function(){
+    var dest = isProduction? "release/js/libs":"dev/js/libs"
+
+    return gulp.src([phaserLibsPath+'pixi.min.js',
+    phaserLibsPath+'p2.min.js',
+    phaserLibsPath+'phaser-split.min.js'])
+    .pipe(concat('bundle.js'))
+    .pipe(gulp.dest(dest));
+
+});
+
+gulp.task('gzip',function(){
+    var dest = isProduction? "release/":"dev/"
+    return gulp.src(dest+"**/*.js")
+    .pipe(gzip())
+    .pipe(gulp.dest(dest))
+    
 });
 
 gulp.task('bundleTests', function() {
@@ -48,12 +68,11 @@ gulp.task('bundleTests', function() {
          return b.bundle()
           .pipe(source('bundle.js'))
           .pipe(buffer())
-          //.pipe(gap.prependFile('./node_modules/phaser/build/custom/pixi.min.js'))
-          //.pipe(gap.prependFile('./node_modules/phaser/build/custom/p2.min.js'))
           .pipe(gulp.dest("src/tests"))
 });
 
 gulp.task('test',['bundleTests'], function (done) {
+
     return new Server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true
@@ -64,9 +83,30 @@ gulp.task('html', function() {
 
     var dest = isProduction? "release/":"dev/"
 
-    gulp.src("src/index.html")
+    return gulp.src("src/index.html")
     .pipe(gulp.dest(dest))
 
 });
 
-gulp.task('build', ['html', 'scripts']);
+gulp.task('assets', function() {
+    
+    var dest = isProduction? "release/assets":"dev/assets"
+
+    return gulp.src("src/assets/**/*")
+    .pipe(gulp.dest(dest))
+});
+
+gulp.task('serve',['build'], serve({
+    root: isProduction?["release"]:["dev"],
+    port: 8080,
+  }));
+
+var buildSubtasks = ['html', 'scripts',"assets"]
+
+if(withLibs)
+    buildSubtasks.push('libs');
+
+if(isProduction)
+    buildSubtasks.push('gzip');
+
+gulp.task('build',gulpsync.sync(buildSubtasks) );

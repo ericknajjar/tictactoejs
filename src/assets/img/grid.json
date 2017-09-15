@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "frame1.png",
+	"frame": {"x":0,"y":0,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
+},
+{
+	"filename": "frame2.png",
+	"frame": {"x":256,"y":0,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
+},
+{
+	"filename": "frame3.png",
+	"frame": {"x":512,"y":0,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "grid.png",
+	"format": "RGBA8888",
+	"size": {"w":768,"h":256},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:fdd140f82b102a25ad439d22a7dd46ef:bc7d2f243b97ba0bb0967a6c6395344d:8c341fede1d0502e7017a08b96111fcb$"
+}
+}
