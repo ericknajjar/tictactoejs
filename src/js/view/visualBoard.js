@@ -22,7 +22,6 @@ export class VisualBoard
         let grid = this.game.add.sprite(this._origin.X, this._origin.Y, 'grid', 'frame1.png');
         grid.anchor.x = 0.5;
         grid.anchor.y = 0.5;
-        //grid.scale.setTo(2,2);
         grid.animations.add('loop');
         grid.animations.play('loop', 15, true);
         return grid;
@@ -55,7 +54,10 @@ export class VisualBoard
     displayPlay(play){
 
         this._markPlayer(play.Target,play.Player);
-       // if(play.)
+        if(play.EndedTheGame)
+        {
+            this._markVictory(play.VictoryState.Pattern);
+        }
        
     }
 
@@ -94,6 +96,7 @@ export class VisualBoard
     _createClickable(logicalPosition, screenPosition){
         let sprite = this.game.add.sprite(screenPosition.X,screenPosition.Y,'player','x1.png');
         sprite.scale.setTo(0.25,0.25);
+
         sprite.tint = 0;
 
         sprite.animations.add('loopX', Phaser.Animation.generateFrameNames('x', 1, 3, '.png', 0), 15, true);

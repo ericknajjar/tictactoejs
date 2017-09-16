@@ -1,6 +1,6 @@
-import {CheckEquality} from "../js/equality.js"
-import {Point} from "../js/gameContext/point.js"
-import {BoardVictoryAnalyser} from "../js/gameContext/boardVictoryAnalyser.js"
+import {CheckEquality} from "../equality.js"
+import {Point} from "../gameContext/point.js"
+import {BoardVictoryAnalyser} from "../gameContext/boardVictoryAnalyser.js"
 
 function ContainsOnly(analyser,strategies){
     

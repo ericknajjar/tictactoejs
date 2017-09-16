@@ -25,7 +25,7 @@ gulp.task('scripts', function() {
     var b = browserify({
         entries: 'src/js/app.js',
         insertGlobals : true,
-        debug : true
+        debug : !isProduction
       }).transform(babelify,{presets: ["env"]})
 
      return producer = b.bundle()
@@ -58,7 +58,7 @@ gulp.task('gzip',function(){
 gulp.task('bundleTests', function() {
         
         var b = browserify({
-            entries: 'src/tests/tests.js',
+            entries: 'src/js/tests/tests.js',
             insertGlobals : true,
             debug : true
           }).transform(babelify,{presets: ["env"]})
@@ -66,14 +66,14 @@ gulp.task('bundleTests', function() {
          return b.bundle()
           .pipe(source('bundle.js'))
           .pipe(buffer())
-          .pipe(gulp.dest("src/tests"))
+          .pipe(gulp.dest("src/js/tests"))
 });
 
 gulp.task('test',['bundleTests'], function (done) {
 
     return new Server({
         configFile: __dirname + '/karma.conf.js',
-        singleRun: true
+        singleRun: true,
     }, done).start();
 });
 

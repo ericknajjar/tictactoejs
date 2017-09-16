@@ -1,8 +1,8 @@
-import {Point} from "../js/gameContext/point.js"
-import {Player} from "../js/gameContext/player.js"
-import {GameState} from "../js/gameContext/gameState.js"
-import {Move} from "../js/gameContext/move.js"
-import {CheckEquality} from "../js/equality.js"
+import {Point} from "../gameContext/point.js"
+import {Player} from "../gameContext/player.js"
+import {GameState} from "../gameContext/gameState.js"
+import {Move} from "../gameContext/move.js"
+import {CheckEquality} from "../equality.js"
 
 let starterWins = [
     new Point(0,0),new Point(0,2),new Point(1,0),new Point(1,2),new Point(2,0)

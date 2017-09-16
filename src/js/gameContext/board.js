@@ -2,6 +2,7 @@ import {VictoryState} from "./victoryState.js"
 import {Player} from "./player.js"
 import {BoardVictoryAnalyser} from "./boardVictoryAnalyser.js"
 import {Point} from "./point.js"
+
 function _fromPlay(newData,victoryState,numberOfPlays)
 {
     let newBoard = new Board(false);
@@ -43,7 +44,12 @@ export class Board{
 
     SetCellOwner(player,position){
     
-        let newData = this._boardData.slice();
+        let newData = [];
+
+        this._boardData.forEach((e)=>{
+            newData.push(e.slice());
+        });
+
         newData[position.X][position.Y] = player;
 
         if(this._numberOfPlays>=2 && this.VictoryState.Winner.equals(Player.None))

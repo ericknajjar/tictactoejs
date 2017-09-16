@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
-import {GameState} from "../gameContext/gameState.js";
-import {Player} from "../gameContext/player.js";
-
+import {GameState} from "./gameState.js";
+import {Player} from "./player.js";
+import {TicTacToeAi} from "./ticTacToeAi.js";
 class Play
 {
     constructor(player,point,victoryState,endedTheGame){
@@ -18,6 +18,7 @@ export class TicTacToeGame{
 
         this._gameState = new GameState(Player.X);
         this.PlayObservable = this._buildPlayObservable(clickObservable);
+        this._ai = new TicTacToeAi(perfectAi);
     }
 
     _buildPlayObservable(clickObservable) {
@@ -54,16 +55,13 @@ export class TicTacToeGame{
     _play(move, observer){
         let player = this._gameState.CurrentPlayer;
         this._gameState = this._gameState.PickAMove(move);
+        console.log(this._gameState);
         let play = new Play(player,move.Target,this._gameState.VictoryState,this._gameState.IsEndState);
         observer.next(play);
     }
 
     _aiPlay(observer){
-
-       let possibleMoves = this._gameState.PossibleMoves;
-
-       
-       let move = possibleMoves[Math.floor(Math.random()*possibleMoves.length)];
+       let move = this._ai.NextMove(this._gameState);
 
        this._play(move,observer);
     }

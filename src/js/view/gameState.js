@@ -32,9 +32,7 @@ export class GameState extends Phaser.State{
         let game = new TicTacToeGame(this._visualBoard.ClickObservable);
 
         game.PlayObservable.subscribe((play)=>{
-
             let sprite = this._visualBoard.displayPlay(play);
-            console.log(play.Target);
         });
 
     }

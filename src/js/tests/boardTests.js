@@ -1,8 +1,8 @@
-import {Board} from "../js/gameContext/board.js"
-import {VictoryState} from "../js/gameContext/victoryState.js"
-import {Player} from "../js/gameContext/player.js"
-import {CheckEquality} from "../js/equality.js"
-import {Point} from "../js/gameContext/point.js"
+import {Board} from "../gameContext/board.js"
+import {VictoryState} from "../gameContext/victoryState.js"
+import {Player} from "../gameContext/player.js"
+import {CheckEquality} from "../equality.js"
+import {Point} from "../gameContext/point.js"
 
 describe("A Board", function() {
   beforeEach(function() {
@@ -13,6 +13,14 @@ describe("A Board", function() {
       let board = new Board();
 
       expect(VictoryState.Indetermined).toEqual(board.VictoryState);
+    });
+
+    it("is immutable", function() {
+      let board = new Board();
+      let pos = new Point(0, 0);
+      let newBoard = board.SetCellOwner (Player.X,pos);
+
+      expect(board.getPlayer(pos)).toEqual(Player.None);
     });
 
     
