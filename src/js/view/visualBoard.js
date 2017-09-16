@@ -22,7 +22,7 @@ export class VisualBoard
         let grid = this.game.add.sprite(this._origin.X, this._origin.Y, 'grid', 'frame1.png');
         grid.anchor.x = 0.5;
         grid.anchor.y = 0.5;
-        grid.scale.setTo(2,2);
+        //grid.scale.setTo(2,2);
         grid.animations.add('loop');
         grid.animations.play('loop', 15, true);
         return grid;
@@ -80,12 +80,9 @@ export class VisualBoard
 
     _calculateScreenPosition(logicalPosition,width,height){
 
-        let xOffset = this._origin.X/2;
-        let yOffset = this._origin.Y/2;
+        let xOffset = this._origin.X - width/2;
+        let yOffset = this._origin.Y - height/2;
 
-        //alinhando melhor com a imagem de fundo
-        xOffset += width*0.05;
-        yOffset -= height*0.05;
 
         let x = logicalPosition.X*(width/3) + xOffset;
         let y = logicalPosition.Y*(height/3) + yOffset;
@@ -96,7 +93,7 @@ export class VisualBoard
 
     _createClickable(logicalPosition, screenPosition){
         let sprite = this.game.add.sprite(screenPosition.X,screenPosition.Y,'player','x1.png');
-        sprite.scale.setTo(0.5,0.5);
+        sprite.scale.setTo(0.25,0.25);
         sprite.tint = 0;
 
         sprite.animations.add('loopX', Phaser.Animation.generateFrameNames('x', 1, 3, '.png', 0), 15, true);

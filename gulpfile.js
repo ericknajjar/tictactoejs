@@ -39,9 +39,9 @@ gulp.task('scripts', function() {
 gulp.task('libs',function(){
     var dest = isProduction? "release/js/libs":"dev/js/libs"
 
+    //    phaserLibsPath+'p2.min.js',
     return gulp.src([phaserLibsPath+'pixi.min.js',
-    phaserLibsPath+'p2.min.js',
-    phaserLibsPath+'phaser-split.min.js'])
+    phaserLibsPath+'phaser-no-physics.min.js'])
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest(dest));
 

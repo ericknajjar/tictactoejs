@@ -25,7 +25,7 @@ export class GameState extends Phaser.State{
         let background = this.game.add.image(this.game.world.centerX, this.game.world.centerY, 'background');
         background.anchor.x = 0.5;
         background.anchor.y = 0.5;
-        background.scale.setTo(0.5,0.5);
+        background.scale.setTo(0.25,0.25);
 
         this._visualBoard = new VisualBoard(new Point(this.game.world.centerX,this.game.world.centerY),this.game);
 
