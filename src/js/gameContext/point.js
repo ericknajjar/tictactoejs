@@ -21,4 +21,9 @@ export class Point{
         return other.Y == this.Y && other.X == this.X;
     }
 
+    toString()
+    {
+        return "Point("+this.X+","+this.Y+")";
+    }
+
 }

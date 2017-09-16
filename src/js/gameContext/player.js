@@ -13,15 +13,24 @@ export class Player
         return new Player("None");
     }
 
-    constructor(name){
-        
-        this._getName = ()=>{
-            return name;
-        }
+    get Other(){
+        if(this._name == "X")
+            return Player.O;
+        else if(this._name == "None")
+            return this;
+
+        return Player.X;
     }
 
+    constructor(name){
+        
+        this._name = name;
+   
+    }
+
+
     toString(){
-        return this._getName();
+        return this._name;
     }
 
     equals(other)
@@ -31,6 +40,6 @@ export class Player
             return false;
         }
 
-        return this._getName() == other._getName();
+        return this._name == other._name;
     }
 }

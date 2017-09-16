@@ -1,4 +1,8 @@
 import {GameState} from './view/gameState.js';
 
+let game = new Phaser.Game("80%","80%", Phaser.CANVAS,'tictactoe');
 
-var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'tictactoe', new GameState());
+game.state.add("gameState", new GameState());
+game.state.start("gameState", true, false);
+
+
