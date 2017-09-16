@@ -31,6 +31,10 @@ export class VisualBoard
 
         let spriteGrid =[];
         let allObservables = [];
+        let clickables = this.game.add.group();
+        clickables.x = this._origin.X - width/2;
+        clickables.y = this._origin.Y- height/2;
+
         for(let i=0;i<3;++i)
         {
             let list = [];
@@ -38,14 +42,14 @@ export class VisualBoard
             for(let j=0;j<3;++j)
             {
                let logicalPosition = new Point(i,j);
-               let screenPositin = this._calculateScreenPosition(logicalPosition,width,height);
-               let clickable = this._createClickable(logicalPosition,screenPositin);
+               let clickable = this._createClickable(logicalPosition,clickables);
                list.push(clickable[0]);
                allObservables.push(clickable[1]);
             }
             spriteGrid.push(list);
         }
-
+        clickables.align(3, -1, width/3, height/3);
+     
         return [spriteGrid,Observable.merge(...allObservables)];
     }
 
@@ -80,21 +84,9 @@ export class VisualBoard
 
     }
 
-    _calculateScreenPosition(logicalPosition,width,height){
 
-        let xOffset = this._origin.X - width/2;
-        let yOffset = this._origin.Y - height/2;
-
-
-        let x = logicalPosition.X*(width/3) + xOffset;
-        let y = logicalPosition.Y*(height/3) + yOffset;
-
-        
-        return new Point(x,y);
-    }
-
-    _createClickable(logicalPosition, screenPosition){
-        let sprite = this.game.add.sprite(screenPosition.X,screenPosition.Y,'player','x1.png');
+    _createClickable(logicalPosition,group){
+        let sprite = group.create(0,0,'player','x1.png');
         sprite.scale.setTo(0.25,0.25);
 
         sprite.tint = 0;
@@ -109,8 +101,5 @@ export class VisualBoard
 
         return [sprite,observable];
     }
-
-
-
 
 }

@@ -53,9 +53,10 @@ export class TicTacToeGame{
     }
 
     _play(move, observer){
+        
         let player = this._gameState.CurrentPlayer;
         this._gameState = this._gameState.PickAMove(move);
-        console.log(this._gameState);
+  
         let play = new Play(player,move.Target,this._gameState.VictoryState,this._gameState.IsEndState);
         observer.next(play);
     }
