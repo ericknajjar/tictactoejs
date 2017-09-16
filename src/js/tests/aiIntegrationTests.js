@@ -134,7 +134,6 @@ describe("Ai", function() {
 		let draw = gameState.PossibleMoves.length == 0 
 				   && gameState.VictoryState.Winner.equals(Player.None);
 				   
-		console.log(gameState.VictoryState.Winner);
 		expect(draw).toEqual(true);
     });
 	

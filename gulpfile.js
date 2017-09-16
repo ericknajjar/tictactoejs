@@ -14,7 +14,7 @@ var gulpif = require('gulp-if');
 var gulpsync = require('gulp-sync')(gulp);
 
 var isProduction = (argv.prod === undefined) ? false : true;
-var withLibs = (argv.withlibs === undefined) ? false : true;
+var withLibs = (argv.omitlibs === undefined) ? true : false;
 
 var phaserLibsPath = './node_modules/phaser/build/custom/';
 
