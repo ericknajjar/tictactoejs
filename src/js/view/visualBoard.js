@@ -55,7 +55,7 @@ export class VisualBoard
     displayPlay(play){
 
         this._markPlayer(play.Target,play.Player);
-        if(play)
+       // if(play.)
        
     }
 

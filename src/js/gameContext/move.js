@@ -1,22 +1,24 @@
-import {Point} from "./point.js"
 
 export class Move 
 {
 
-    constructor(target){
+    constructor(target)
+    {
         this._target = target;
     }
 
-    get Target(){  return this._target }
+    get Target(){
+        return this._target;
+    }
 
-    equals (other)
+    equals(other)
     {
         if(typeof other != typeof this)
         {
             return false;
         }
 
-        return this._target.equals(other);
+        return this._target.equals(other._target);
     }
     
 

@@ -2,7 +2,6 @@ import {VictoryState} from "./victoryState.js"
 import {Player} from "./player.js"
 import {BoardVictoryAnalyser} from "./boardVictoryAnalyser.js"
 import {Point} from "./point.js"
-
 function _fromPlay(newData,victoryState,numberOfPlays)
 {
     let newBoard = new Board(false);
@@ -30,15 +29,17 @@ export class Board{
     }
 
     foreachCell(callback){
-        for(let i=0;i<3;++i)
+
+        for (let i = 0; i < 3; ++i) 
         {
-            for(let j=0;j<3;++j)
+            for (let j = 0; j < 3; ++j) 
             {
-                let point = new Point(i,j);
-                callback(this._boardData[i][j],point);
+                let target = new Point(i,j);
+                callback(this._boardData[i][j],target);
             }
         }
     }
+
 
     SetCellOwner(player,position){
     

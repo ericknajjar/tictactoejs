@@ -6,31 +6,33 @@ export class Player
     }
 
     static get O(){
-        return new Player("0");
+        return new Player("O");
     }
 
     static get None(){
         return new Player("None");
     }
 
-    get Other(){
-        if(this._name == "X")
+    get Other()
+    {
+        if (this._name == "X")
             return Player.O;
-        else if(this._name == "None")
+        else if (this._name ==  "None")
             return this;
 
         return Player.X;
+        
     }
+
 
     constructor(name){
         
         this._name = name;
-   
+        
     }
 
-
     toString(){
-        return this._name;
+        return "Player("+this._name+")";
     }
 
     equals(other)

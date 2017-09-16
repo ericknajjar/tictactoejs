@@ -47,7 +47,7 @@ export class VictoryCheckStrategy{
     }
 
     toString(){
-        return "VictoryCheckStrategy("+this._t+")";
+        return "VictoryCheckStrategy("+this._Pattern+")";
     }
 
 
