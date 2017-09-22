@@ -27,30 +27,40 @@ export class GameState
         return moves;
     }
 
-    constructor(player,board = new Board()){
+    get movesCount(){
+        return this._board.movesCount;
+    }
+
+    constructor(player,board = new Board(),possibleMoves = undefined){
         
         this._board = board;
-        this._possibleMoves =  GameState.CreateAllMoves (board);
+        if(possibleMoves == undefined)
+            this._possibleMoves =  GameState.CreateAllMoves (board);
+        else
+            this._possibleMoves = possibleMoves;
+
         this._currentPlayer = player;
         
-    }
+    } 
         
         
     PickAMove(move)
     {
-        let contais = this._possibleMoves.find((e)=>{return e.equals(move)}) != undefined;
+        let newMoves = this._possibleMoves.filter((e)=>{ return !e.equals(move)});
+
+        let contais = newMoves.length < this._possibleMoves.length;
 
         if (!contais)
             throw "Can't play an impossible move: ";
         
         let newBoard = this._board.SetCellOwner (this._currentPlayer, move.Target);
 
-        return new GameState (this._currentPlayer.Other, newBoard);
+        return new GameState (this._currentPlayer.Other, newBoard,newMoves);
     }
 
     get IsEndState(){
     
-            return (!this.VictoryState.Winner.equals (Player.None)) || this._possibleMoves.length == 0;
+            return this._possibleMoves.length == 0 || (!this.VictoryState.Winner.equals (Player.None));
     } 
 
     getPlayer(point){

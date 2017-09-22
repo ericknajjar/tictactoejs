@@ -93,7 +93,7 @@ describe("A GameState", function() {
 
         gameState = gameState.PickAMove (move);
 
-        let owner = gameState.getPlayer(new Point (0, 0));
+        let owner = gameState.getPlayer(move.Target);
                 
         expect(owner).toEqual(Player.X);
         
@@ -107,7 +107,7 @@ describe("A GameState", function() {
 
         gameState = gameState.PickAMove (move);
 
-        let owner = gameState.getPlayer(new Point (0, 0));
+        let owner = gameState.getPlayer(move.Target);
                 
         expect(Player.O).toEqual(owner);
         

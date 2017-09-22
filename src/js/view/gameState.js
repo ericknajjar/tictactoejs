@@ -37,7 +37,7 @@ export class GameState extends Phaser.State{
       //  this.createRestartButton(this.game.world.centerX+background.width/3,this.game.world.heigth-10);
         this.createRestartButton(this.game.world.centerX,this.game.world.heigth-20);
 
-        this._visualBoard = new VisualBoard(new Point(this.game.world.centerX,this.game.world.centerY),this.game);
+        this._visualBoard = new VisualBoard(Point.Make(this.game.world.centerX,this.game.world.centerY),this.game);
 
         let game = new TicTacToeGame(this._visualBoard.ClickObservable,!this._easy);
 

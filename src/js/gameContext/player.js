@@ -1,18 +1,8 @@
 
+
 export class Player
 {
-    static get X(){
-        return new Player("X");
-    }
-
-    static get O(){
-        return new Player("O");
-    }
-
-    static get None(){
-        return new Player("None");
-    }
-
+ 
     get Other()
     {
         if (this._name == "X")
@@ -37,6 +27,9 @@ export class Player
 
     equals(other)
     {
+        if(this === other)
+            return true;
+
         if(typeof other != typeof this)
         {
             return false;
@@ -45,3 +38,7 @@ export class Player
         return this._name == other._name;
     }
 }
+
+Player.X = new Player("X")
+Player.O = new Player("O")
+Player.None = new Player("None")

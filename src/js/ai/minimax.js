@@ -27,18 +27,19 @@ export class MiniMaxAi
     }
 
     NextMove(beginingState){
+
         if(!beginingState.IsEndState)
             return this._MiniMax (beginingState, -1000,1000).Move;
 
         throw "Can't determine next move from an end state";
     }
 
-
     _MiniMax(s,alpha, beta)
     {
+ 
         let best = new MoveScore (null,0);
-
-        for(let i=0;i<s.AllMoves.length;++i)
+        let length = s.AllMoves.length;
+        for(let i=0;i<length;++i)
         {
             let move = s.AllMoves[i];
 

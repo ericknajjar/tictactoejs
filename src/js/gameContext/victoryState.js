@@ -1,13 +1,8 @@
 import {Player} from "./player.js"
-import * as _ from "lodash";
 import {CheckEquality} from "../equality.js"
 
 export class VictoryState {
 
-
-    static get Indetermined() {
-       return new VictoryState(Player.None,[]);
-    }
 
     constructor(winner, pattern){
 
@@ -25,6 +20,9 @@ export class VictoryState {
 
     equals(other)
     {
+        if(this === other)
+            return true;
+
         if(typeof other != typeof this)
         {
             return false;
@@ -33,3 +31,5 @@ export class VictoryState {
         return this.Winner.equals(other.Winner) && CheckEquality(this.Pattern,other.Pattern);
     }
 }
+
+VictoryState.Indetermined = new VictoryState(Player.None,[]);

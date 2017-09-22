@@ -122,18 +122,22 @@ describe("Ai", function() {
 
 	it("should draw with itself", function() {
         
+
 		let gameState = new GameState (Player.X);
-		
+        var t0 = performance.now();
+       
 		while(!gameState.IsEndState)
 		{
 			var move = ai.NextMove (gameState);
 			gameState = gameState.PickAMove (move);
 
 		}
+        var t1 = performance.now();
 
 		let draw = gameState.PossibleMoves.length == 0 
 				   && gameState.VictoryState.Winner.equals(Player.None);
-				   
+                   
+        console.log("Test took " + (t1 - t0) + " milliseconds.")
 		expect(draw).toEqual(true);
     });
 	

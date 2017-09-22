@@ -12,7 +12,11 @@ function _fromPlay(newData,victoryState,numberOfPlays)
     return newBoard;
 }
 
+const  bestOrder = [Point.Make(1,1),Point.Make(0,0),Point.Make(2,0),Point.Make(2,2),Point.Make(0,2),
+    Point.Make(1,0), Point.Make(2,1),Point.Make(1,2),Point.Make(0,1)];
+
 export class Board{
+  
     
     constructor(initBoard=true){
         if(initBoard)
@@ -25,31 +29,27 @@ export class Board{
         }
     }
 
+    get movesCount(){
+        return this._numberOfPlays;
+    }
+
     getPlayer(point) {
         return this._boardData[point.X][point.Y];
     }
 
     foreachCell(callback){
 
-        for (let i = 0; i < 3; ++i) 
-        {
-            for (let j = 0; j < 3; ++j) 
-            {
-                let target = new Point(i,j);
-                callback(this._boardData[i][j],target);
-            }
-        }
+        bestOrder.forEach((target)=>{
+         callback(this._boardData[target.X][target.Y],target);
+        });
     }
 
 
     SetCellOwner(player,position){
     
-        let newData = [];
+        let newData = this._boardData.slice();
 
-        this._boardData.forEach((e)=>{
-            newData.push(e.slice());
-        });
-
+        newData[position.X] = newData[position.X].slice();
         newData[position.X][position.Y] = player;
 
         if(this._numberOfPlays>=2 && this.VictoryState.Winner.equals(Player.None))
@@ -58,7 +58,6 @@ export class Board{
             let vicoryState = victoryAnalyser.Check(newData);
 
             return _fromPlay(newData,vicoryState,this._numberOfPlays+1);
-
         }
         else
         {

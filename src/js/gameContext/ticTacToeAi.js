@@ -1,6 +1,7 @@
 import {MiniMaxAi} from "../ai/minimax.js"
 import * as _ from "lodash";
-
+import {Move} from "./move.js"
+import {Point} from "./point.js"
 class AiStateAdapter
 {
     constructor(gameState,player = null)
@@ -53,6 +54,25 @@ export class TicTacToeAi
 
     NextMove(gameState)
     {
+       /* if(gameState.movesCount == 0)
+        {
+            return new Move(new Point(1,1));
+        }
+        else if(gameState.movesCount == 0)
+        {
+            let coolMoves = [new Point(0,0),new Point(2,0),new Point(2,2),new Point(0,2)]
+
+            for(let i=0;i<coolMoves.length;++i)
+            {
+                let target = coolMoves[i];
+                let move = gameState.PossibleMoves.find((e=>{return e.Target = target;}));
+                
+                if(move !=undefined)
+                    return move;
+            }
+
+        }*/
+
         if(!this._perfect && Math.random() < 0.1)
         {
             return _.sample(gameState.PossibleMoves);

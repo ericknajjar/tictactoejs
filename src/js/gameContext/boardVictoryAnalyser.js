@@ -14,7 +14,7 @@ function _MakeRow(index)
 
     for (let i = 0; i < 3; ++i) 
     {
-       list.push(new Point(i,index));
+       list.push(Point.Make(i,index));
     }
 
     return list;
@@ -30,7 +30,7 @@ function _MakeDiagonal(direction)
         let x = Math.abs(offset -i);
         let y = i;
 
-        list.push(new Point(x,y));
+        list.push( Point.Make(x,y));
     }
 
     return list;
@@ -42,7 +42,7 @@ function _MakeColumn(index)
 
     for (let i = 0; i < 3; ++i) 
     {
-        list.push(new Point(index,i));
+        list.push(Point.Make(index,i));
     }
 
     return list;
@@ -51,53 +51,71 @@ function _MakeColumn(index)
 export class BoardVictoryAnalyser{
 
      
-     static get  FirstRow(){
-        return new VictoryCheckStrategy(_MakeRow(0));
+    static get  FirstRow(){
+        if(BoardVictoryAnalyser._FirstRow == undefined)
+            BoardVictoryAnalyser._FirstRow = new VictoryCheckStrategy(_MakeRow(0));
+        return BoardVictoryAnalyser._FirstRow;
      }; 
 
      static  get SecondRow(){
-        return new VictoryCheckStrategy(_MakeRow(1));
+        if(BoardVictoryAnalyser._FirstRow == undefined)
+            BoardVictoryAnalyser._FirstRow = new VictoryCheckStrategy(_MakeRow(1));
+
+        return BoardVictoryAnalyser._FirstRow;
      };
 
      static get  ThirdRow(){
-        return new VictoryCheckStrategy(_MakeRow(2));
+        if(BoardVictoryAnalyser._ThirdRow == undefined)
+            BoardVictoryAnalyser._ThirdRow = new VictoryCheckStrategy(_MakeRow(2));
+
+        return BoardVictoryAnalyser._ThirdRow;
+
      }; 
 
 
      static get FirstColumn(){
-        return new VictoryCheckStrategy(_MakeColumn(0));
+        if(BoardVictoryAnalyser._FirstColumn == undefined)
+            BoardVictoryAnalyser._FirstColumn = new VictoryCheckStrategy(_MakeColumn(0));
+
+        return BoardVictoryAnalyser._FirstColumn;
      }; 
 
      static get SecondColumn(){
-        return new VictoryCheckStrategy(_MakeColumn(1));
+        if(BoardVictoryAnalyser._SecondColumn == undefined)
+            BoardVictoryAnalyser._SecondColumn = new VictoryCheckStrategy(_MakeColumn(1));
+
+        return BoardVictoryAnalyser._SecondColumn;
      };
 
      static  get ThirdColumn(){
-        return new VictoryCheckStrategy(_MakeColumn(2));
-     }; 
+        if(BoardVictoryAnalyser._ThirdColumn == undefined)
+            BoardVictoryAnalyser._ThirdColumn = new VictoryCheckStrategy(_MakeColumn(2));
+
+        return BoardVictoryAnalyser._ThirdColumn;
+
+     };
 
 
      static get LeftRightDiagonal(){
-        return new VictoryCheckStrategy(_MakeDiagonal(DiagonalDirection.LeftRight));
+        if(BoardVictoryAnalyser._LeftRightDiagonal == undefined)
+            BoardVictoryAnalyser._LeftRightDiagonal = new VictoryCheckStrategy(_MakeDiagonal(DiagonalDirection.LeftRight));
+
+        return BoardVictoryAnalyser._LeftRightDiagonal;
+     };
+
+     static get RightLeftDiagonal(){
+        if(BoardVictoryAnalyser._RightLeftDiagonal == undefined)
+            BoardVictoryAnalyser._RightLeftDiagonal = new VictoryCheckStrategy(_MakeDiagonal(DiagonalDirection.RightLeft));
+
+        return BoardVictoryAnalyser._RightLeftDiagonal;
      };
 
      static get RightLeftDiagonal(){
         return new VictoryCheckStrategy(_MakeDiagonal(DiagonalDirection.RightLeft));
      }; 
 
-     static get _rows(){
-         return [BoardVictoryAnalyser.FirstRow,BoardVictoryAnalyser.SecondRow,BoardVictoryAnalyser.ThirdRow];
-     }
-
-     static get _columns(){
-        return [BoardVictoryAnalyser.FirstColumn,BoardVictoryAnalyser.SecondColumn,BoardVictoryAnalyser.ThirdColumn];
-    }
-
      constructor(origin){
-
-        let firstRow = new VictoryCheckStrategy(0); 
-        this._strategies = [BoardVictoryAnalyser.FirstColumn,BoardVictoryAnalyser.FirstRow,BoardVictoryAnalyser.LeftRightDiagonal];
-
+         
         this._strategies = [BoardVictoryAnalyser._rows[origin.Y],BoardVictoryAnalyser._columns[origin.X]];
         let hasRightLeftDiagonal = false;
 
@@ -114,7 +132,7 @@ export class BoardVictoryAnalyser{
                 
         }
 
-        if(Math.abs(origin.X-origin.Y) == 2 && !hasRightLeftDiagonal)
+        if(!hasRightLeftDiagonal && Math.abs(origin.X-origin.Y) == 2)
             this._strategies.push(BoardVictoryAnalyser.RightLeftDiagonal);
      }
 
@@ -158,3 +176,6 @@ export class BoardVictoryAnalyser{
      }
 
 };
+
+BoardVictoryAnalyser._rows = [BoardVictoryAnalyser.FirstRow,BoardVictoryAnalyser.SecondRow,BoardVictoryAnalyser.ThirdRow];
+BoardVictoryAnalyser._columns = [BoardVictoryAnalyser.FirstColumn,BoardVictoryAnalyser.SecondColumn,BoardVictoryAnalyser.ThirdColumn];

@@ -13,6 +13,9 @@ export class Move
 
     equals(other)
     {
+        if(this === other)
+            return true;
+
         if(typeof other != typeof this)
         {
             return false;
